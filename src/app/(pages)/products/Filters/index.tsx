@@ -5,7 +5,9 @@ import React from 'react'
 import classes from './index.module.scss'
 import { useFilter } from '../../../_providers/Filter'
 import { Category } from '../../../../payload/payload-types'
-import { Checkbox } from 'payload/components/forms'
+import { Checkbox } from '../../../_components/Checkbox'
+import { HR } from '../../../_components/HR'
+
 
 
 const Filters = ({categories}: {categories: Category[]}) => {
@@ -20,13 +22,16 @@ const Filters = ({categories}: {categories: Category[]}) => {
         <h6 className={classes.title}>Product Categories</h6>
         <div className={classes.categories}></div>
         {categories.map(category => {
-          const isSelected = false
+          const isSelected = categoryFilters.includes(category.id)
 
           return (
-            <Checkbox key={category.id} label={category.title} />
+            <Checkbox key={category.id} label={category.title} value={category.id} isSelected={isSelected} onClickHandler={handleCategories} />
           )
         })}
       </div>
+      <HR className={classes.hr}/>
+      <h6 className={classes.title}>Sort By</h6>
+      <div className={classes.categories}></div>
     </div>
   )
 }
